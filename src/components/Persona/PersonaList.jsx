@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { connect, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
-import EditarPersona from './EditarPersona'
-import CircularProgress from '@material-ui/core/CircularProgress'
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+import IconButton from '@material-ui/core/IconButton';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import ClassIcon from '@material-ui/icons/Class';
+
 import FormatList from '@material-ui/icons/FormatListNumbered';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
+
 import PersonIcon from '@material-ui/icons/Person';
 import EmailIcon from '@material-ui/icons/Email';
 import Assignment from '@material-ui/icons/AssignmentInd';
@@ -46,9 +46,12 @@ function PersonaList({ getPersonaAction }) {
 
     //     resetPersona();
     // }
+    const handlePrestar = (e) => {
 
+    }
 
-    // const handleDelete = (e) => {
+    const handleDelete = (e) => {
+        }
     //     e.preventDefault();
 
     //     async function deletePersona() {
@@ -65,7 +68,7 @@ function PersonaList({ getPersonaAction }) {
     //                     setReload(reload + 1)
     //                 })
     //                 .catch((error) => {
-    //                     console.error(error)
+    //                     console.error(error)s
     //                     alert.error('¡La persona tiene libros asociados!')
     //                 });
     //         }
@@ -129,13 +132,34 @@ function PersonaList({ getPersonaAction }) {
         if (personas != undefined) {
 
             const personaAux = personas.map((persona, index) => (
-                <tr key={index}>
+                <tr key={index} className= "btt">
 	            	<td id="indexPersona"><p><strong>{index + 1}</strong></p></td> 
 	                <td id="nombrePersona"><p>{persona.nombre}</p></td>
 	                <td id="apellidoPersona"><p>{persona.apellido}</p></td>    
 	                <td id="emailPersona"><p>{persona.email}</p></td>
 	            	<td id="aliasPersona"><p>{persona.alias}</p></td>
                     <td id="idPersona"><p>{persona.id}</p></td>
+                    <td>
+						<IconButton color="primary">
+							<Tooltip title="Prestados">
+								<MenuBookIcon className="center" onClick={() => {handlePrestar(persona.id)}} />
+							</Tooltip>
+						</IconButton>
+					</td>
+					<td id="borrarbtt">
+						<IconButton color="primary">
+							<Tooltip title= "Borrar">
+								<DeleteIcon className="center" onClick={() => {handleDelete(persona.id)}} />
+							</Tooltip>
+						</IconButton>
+					</td>
+					<td id="editarbtt">
+						<IconButton color="primary">
+							<Tooltip title= "Editar">
+								<EditIcon className="center" onClick={() => {}} value={persona.id} />
+							</Tooltip>
+						</IconButton>
+					</td>
 	            </tr>
             ))
 
@@ -183,21 +207,9 @@ function PersonaList({ getPersonaAction }) {
                                     <PersonIcon />
                                 </Tooltip>
                             </th>
-                            <th className="funcion">
-                                <Tooltip title= "Prestados">
-                                    <MenuBookIcon />
-                                </Tooltip>
-                            </th>
-                            <th className="funcion">
-                                <Tooltip title= "Borrar">
-                                    <DeleteIcon />
-                                </Tooltip>
-                            </th>
-                            <th className="funcion">
-                                <Tooltip title= "Editar">
-                                    <EditIcon />
-                                </Tooltip>
-                            </th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>

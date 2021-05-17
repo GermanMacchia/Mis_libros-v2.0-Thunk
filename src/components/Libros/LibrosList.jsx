@@ -16,14 +16,15 @@ import PersonIcon from '@material-ui/icons/Person';
 import VerticalAlignBottomIcon from '@material-ui/icons/VerticalAlignBottom';
 import ClassIcon from '@material-ui/icons/Class';
 import FormatList from '@material-ui/icons/FormatListNumbered';
-import  { getLibrosAction, deleteLibroAction, devolverLibroAction, prestarLibroAction } from '../../reducers/librosDuck';
 
-import { set } from 'react-hook-form';
+
+import  { getLibrosAction, deleteLibroAction, devolverLibroAction, prestarLibroAction } from '../../reducers/librosDuck';
 
 function LibrosList ({ getLibrosAction, deleteLibroAction, devolverLibroAction, prestarLibroAction }) {
 
 	const alert = useAlert();
 	const state = useSelector(state => state.libros)
+	const persona = useSelector(state => state.persona)
 	const [librosHtml, setLibrosHtml] = useState();
 	const [libros, setLibros] = useState();
 
@@ -41,6 +42,11 @@ function LibrosList ({ getLibrosAction, deleteLibroAction, devolverLibroAction, 
 		}
 	}, [state.error]);
 
+	useEffect(() => {
+		if(persona.error && persona.error != 0){
+			alert.error("La persona no existe");
+		}
+	}, [persona.error]);
 	// const handleEditar = (e) => {
 	// 	e.preventDefault();
 		
@@ -53,11 +59,12 @@ function LibrosList ({ getLibrosAction, deleteLibroAction, devolverLibroAction, 
 	// 	modal.style = "opacity: 1;";
 	// }
 
-	// const handlePrestar = (id) =>{
+	const handlePrestar = (id) =>{
 
-	// 	const persona = prompt('INGRESA EL ID DE LA PERSONA:');
-	// 	prestarLibroAction(id, persona) 
-	// }
+		const persona = prompt('INGRESA EL ID DE LA PERSONA:');
+		prestarLibroAction(id, persona);
+	}
+
 	// 		await axios({
 	// 		    method: 'put',
 	// 		    url: url + `libro/prestar/` + e.target.value,
@@ -116,33 +123,33 @@ function LibrosList ({ getLibrosAction, deleteLibroAction, devolverLibroAction, 
 		if(libros != undefined) {
 			const librosAux = libros.map((libro, index) => (
 				<tr key={index}>
-					<td id="indexlibro"><p><strong>{index + 1}</strong></p></td>
-					<td id="nombrelibro"><p>{libro.nombre}</p></td>
-					<td id="categorialibro"><p>{libro.categoria_id}</p></td>
-					<td id="descripcionlibro"><p>{libro.descripcion}</p></td>
-					<td id="personalibro"><p>{libro.persona_id}</p></td>
-					<td id="prestarbtt">
+					<td><p><strong>{index + 1}</strong></p></td>
+					<td><p>{libro.nombre}</p></td>
+					<td><p>{libro.categoria_id}</p></td>
+					<td><p>{libro.descripcion}</p></td>
+					<td><p>{libro.persona_id}</p></td>
+					<td>
 						<IconButton color="primary">
 							<Tooltip title="Prestar">
-								<MenuBookIcon className="icon" onClick={() => {}} value={libro.id} />
+								<MenuBookIcon className="icon" onClick={() => {handlePrestar(libro.id)}} />
 							</Tooltip>
 						</IconButton>
 					</td>
-					<td id="devolverbtt">
+					<td>
 						<IconButton color="primary">
 							<Tooltip title= "Devolver">
 								<VerticalAlignBottomIcon className="icon" onClick={() => {handleDevolver(libro.id)}} />
 							</Tooltip>
 						</IconButton>
 					</td>
-					<td id="borrarbtt">
+					<td>
 						<IconButton color="primary">
 							<Tooltip title= "Borrar">
 								<DeleteIcon className="icon" onClick={() => {handleDelete(libro.id)}} />
 							</Tooltip>
 						</IconButton>
 					</td>
-					<td id="editarbtt">
+					<td>
 						<IconButton color="primary">
 							<Tooltip title= "Editar">
 								<EditIcon className="icon" onClick={() => {}} value={libro.id} />
@@ -200,7 +207,6 @@ function LibrosList ({ getLibrosAction, deleteLibroAction, devolverLibroAction, 
 			<div className="modal">
 				{}
 			</div>
-			
 		</div>
 	);
 }

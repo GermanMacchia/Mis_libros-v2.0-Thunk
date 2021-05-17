@@ -131,12 +131,12 @@ function CategoriaList () {
 
             const categoriaAux = categorias.map((categoria, index) => (
                 <tr key={index}>
-	            	<td id="indexcategoria"><p><strong>{index + 1}</strong></p></td> 
-	                <td id="nombrecategoria"><p>{categoria.nombre}</p></td>
-	            	<td id="aliascategoria"><p>{categoria.id}</p></td>
-                    <td id="mostrarLibrosBtt"><button className="funcionBtt" value= {categoria.id}>V</button></td>
-	            	<td id="deleteBtt"><button className="funcionBtt" value= {categoria.id}>X</button></td>
-                    <td id="editadoBtt"><button className="funcionBtt" value= {categoria.id}>E</button></td>
+	            	<td><p><strong>{index + 1}</strong></p></td> 
+	                <td><p>{categoria.nombre}</p></td>
+	            	<td><p>{categoria.id}</p></td>
+                    <td><button className="center" value= {categoria.id}>V</button></td>
+	            	<td><button className="center" value= {categoria.id}>X</button></td>
+                    <td><button className="center" value= {categoria.id}>E</button></td>
 	            </tr>
             ))
 

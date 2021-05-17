@@ -159,9 +159,10 @@ export const deleteLibroAction = (props) => {
                     payload: `${DELETE_LIBROS} : ${props}`
                 })
             }
+        
         }catch(e){
             dispatch({
-                type: DELETE_LIBROS_ERROR,
+                type: GET_LIBROS_ERROR,
                 payload: 'Libro prestado'
             })
         }
@@ -240,11 +241,11 @@ export const prestarLibroAction = (id, persona) => {
         dispatch({
             type: UPDATE_LIBROS
         })
-
+        console.log(id)
+        console.log(persona)
         try{
-            const res = await axios.get(url + `persona/` + persona, {headers: auth})
-            if(res.status == 200){
-                await axios({
+            // await axios.get(url + `persona/` + persona, {headers: auth})
+            await axios({
                     method: 'put',
                     url: url + `libro/prestar/` + id,
                     headers: auth,
@@ -259,11 +260,10 @@ export const prestarLibroAction = (id, persona) => {
                             payload: `${UPDATE_LIBROS} : libro prestado`
                         })
                     )
-            }
         }catch(e){
             dispatch({
-                type: UPDATE_LIBROS_ERROR,
-                error: e.error
+                type: "GET_PERSONA_ERROR",
+                error: "Persona inexistente"
             })
         }
     }

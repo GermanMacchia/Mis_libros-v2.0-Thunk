@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { prestarLibroAction } from './librosDuck';
 //URL
 const url = `https://mis-libros-bck.herokuapp.com/`;
 //CONSTANTES
@@ -15,7 +14,8 @@ const initialData = {
     posting: false,
     updating: false,
     deleting: false,
-    reducerChanges: [] 
+    reducerChanges: [],
+    error: []
 }
 //REDUCER
 export default function reducer(state = initialData, action){
@@ -36,7 +36,7 @@ export default function reducer(state = initialData, action){
             return {
                 ...state,
                 fetchin: false,
-                error: action.error
+                error: [...state.error, action.error]
             }
         default:
             return {
@@ -69,26 +69,6 @@ export const getPersonaAction = () => {
     }
 }
 
-export const getPrestarAction = (id, persona) => {
-//VERIFICAR CATEGORIA
-    return async (dispatch, getState) => {
-        const auth =  {'Authorization': getState().user.user}
-        dispatch({
-            type: GET_PERSONA
-        })
-        try{
-            const res = await axios.get(url + `persona/` + persona, {headers: auth})
-            if(res.status == 200){
-                prestarLibroAction(id, persona)
-            }
-        }catch(e){
-            dispatch({
-                type: GET_PERSONA_ERROR,
-                error: e.error
-            })
-        }
-    }
-}
 
 
 

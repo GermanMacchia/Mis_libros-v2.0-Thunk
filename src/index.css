@@ -23,6 +23,12 @@ body {
     color: white;
 }
 
+.center {
+    margin-left: 20px;
+    color: white;
+}
+
+
 #header img {
     width: 350px;
     height: auto;
