@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { connect, useSelector} from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress'
-
+import IconButton from '@material-ui/core/IconButton';
 import { useAlert } from 'react-alert';
 import EditarCategoria from './EditarCategoria';
 import VerLibros from './VerLibros';
@@ -134,9 +134,27 @@ function CategoriaList () {
 	            	<td><p><strong>{index + 1}</strong></p></td> 
 	                <td><p>{categoria.nombre}</p></td>
 	            	<td><p>{categoria.id}</p></td>
-                    <td><button className="center" value= {categoria.id}>V</button></td>
-	            	<td><button className="center" value= {categoria.id}>X</button></td>
-                    <td><button className="center" value= {categoria.id}>E</button></td>
+                    <td className="center">
+						<IconButton color="primary">
+                            <Tooltip title= "Ver Libros">
+                                    <ListAltIcon className="icon"  />
+                            </Tooltip>
+						</IconButton>
+					</td>
+                    <td className="center">
+                        <IconButton color="primary">
+                                    <Tooltip title= "Borrar">
+                                        <DeleteIcon className="icon"  />
+                                    </Tooltip>
+                        </IconButton>
+                    </td>
+                    <td className="center">
+                        <IconButton color="primary">
+                            <Tooltip title= "Editar">
+                                <EditIcon className="icon" />
+                            </Tooltip>
+                        </IconButton>
+                    </td>
 	            </tr>
             ))
 
@@ -176,21 +194,9 @@ function CategoriaList () {
                                     <ClassIcon />
                                 </Tooltip>                          
                             </th>
-                            <th className="funcion">
-                            <Tooltip title= "Ver Libros">
-                                    <ListAltIcon />
-                                </Tooltip>
-                            </th>  
-                            <th className="funcion">
-                                <Tooltip title= "Borrar">
-                                    <DeleteIcon />
-                                </Tooltip>
-                            </th>
-                            <th className="funcion">
-                                <Tooltip title= "Editar">
-                                    <EditIcon />
-                                </Tooltip>
-                            </th>  
+                            <th></th>  
+                            <th></th>
+                            <th></th>  
                         </tr>
                     </thead>
                     <tbody>

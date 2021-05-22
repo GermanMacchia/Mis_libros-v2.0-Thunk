@@ -120,10 +120,7 @@ function PersonaList({ getPersonaAction }) {
 
 
     useEffect(() => {
-
         setPersonas(state.payload)
-
-
     }, []);
 
 
@@ -139,24 +136,24 @@ function PersonaList({ getPersonaAction }) {
 	                <td id="emailPersona"><p>{persona.email}</p></td>
 	            	<td id="aliasPersona"><p>{persona.alias}</p></td>
                     <td id="idPersona"><p>{persona.id}</p></td>
-                    <td>
+                    <td className="center">
 						<IconButton color="primary">
 							<Tooltip title="Prestados">
-								<MenuBookIcon className="center" onClick={() => {handlePrestar(persona.id)}} />
+								<MenuBookIcon className="icon" onClick={() => {handlePrestar(persona.id)}} />
 							</Tooltip>
 						</IconButton>
 					</td>
-					<td id="borrarbtt">
+					<td className="center">
 						<IconButton color="primary">
 							<Tooltip title= "Borrar">
-								<DeleteIcon className="center" onClick={() => {handleDelete(persona.id)}} />
+								<DeleteIcon className="icon" onClick={() => {handleDelete(persona.id)}} />
 							</Tooltip>
 						</IconButton>
 					</td>
-					<td id="editarbtt">
+					<td className="center">
 						<IconButton color="primary">
 							<Tooltip title= "Editar">
-								<EditIcon className="center" onClick={() => {}} value={persona.id} />
+								<EditIcon className="icon" onClick={() => {}} value={persona.id} />
 							</Tooltip>
 						</IconButton>
 					</td>

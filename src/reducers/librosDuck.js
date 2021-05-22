@@ -25,8 +25,8 @@ const initialData = {
     posting: false,
     updating: false,
     deleting: false,
-    error: [],
-    reducerChanges: [] 
+    error: ["--INIT--"],
+    reducerChanges: ["--INIT--"] 
 }
 //REDUCER
 export default function reducer(state = initialData, action){
@@ -233,7 +233,8 @@ export const devolverLibroAction = (props) => {
 }
 
 export const prestarLibroAction = (id, persona) => {
-//DEVOLVER LIBRO
+//DEVOLVER LIBRO        
+
     return async (dispatch, getState) => {
 
         const auth =  {'Authorization': getState().user.user};
@@ -241,25 +242,26 @@ export const prestarLibroAction = (id, persona) => {
         dispatch({
             type: UPDATE_LIBROS
         })
-        console.log(id)
-        console.log(persona)
+
+
         try{
             // await axios.get(url + `persona/` + persona, {headers: auth})
-            await axios({
-                    method: 'put',
-                    url: url + `libro/prestar/` + id,
-                    headers: auth,
-                    data: {
-                        'id': id,
-                        'persona_id': persona
-                        }
-                    })
-                    .then(          
+            const res = await axios({
+                            method: 'PUT',
+                            url: url + 'libro/prestar/' + id,
+                            headers: auth,
+                            data: {
+                                'id': id,
+                                'persona_id': persona
+                                }
+                            })
+                    if(res.status == 200){
                         dispatch({
                             type: UPDATE_LIBROS_SUCCESS,
-                            payload: `${UPDATE_LIBROS} : libro prestado`
+                            payload: `Libro prestado`
                         })
-                    )
+                    }
+
         }catch(e){
             dispatch({
                 type: "GET_PERSONA_ERROR",

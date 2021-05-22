@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useAlert } from 'react-alert';
 import { Fab } from '@material-ui/core';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import Button from 'react-bootstrap/Button';
 
 export default function Registro () {
 	
@@ -44,20 +45,19 @@ export default function Registro () {
 
 
 	return(
-			<div className= "Logform">
-				<h2>Registrate</h2>
-				<form id="registro">
+			<div className= "log">
+				<form id="reg">
 					<label>User </label>
 					<input type="text" name="usuario"  onChange= {handleChange} placeholder="Nombre de usuario" /><br/>
 					<label>Pass </label>
-					<input type="password" name="clave" onChange= {handleChange} placeholder="Ingrese una contraseña" /><br/>
+					<input id="input2" type="password" name="clave" onChange= {handleChange} placeholder="Ingrese una contraseña" /><br/>
 					<label>Mail </label>
-					<input type="email" name="email" onChange= {handleChange} placeholder="Ingrese un email" /><br/>
+					<input id="input3" type="email" name="email" onChange= {handleChange} placeholder="Ingrese un email" /><br/>
 					<label>Celu </label>
 					<input type="text" name="celu" onChange= {handleChange} placeholder="Nro. de contacto"/><br/><br/>
-					<Fab color="primary">
-						<AssignmentIcon fontSize="large" type= "submit" onClick={handleSubmit} />
-					</Fab>
+					<Button variant="outline-success" size="lg" block onClick={ handleSubmit }>
+						<AssignmentIcon fontSize="large" type= "submit" />
+					</Button>
 				</form>
 			</div>
 		);

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { connect, useSelector } from 'react-redux';
-
+import Filtro from './Filtro';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import EditarLibro from './EditarLibro'
@@ -16,37 +16,54 @@ import PersonIcon from '@material-ui/icons/Person';
 import VerticalAlignBottomIcon from '@material-ui/icons/VerticalAlignBottom';
 import ClassIcon from '@material-ui/icons/Class';
 import FormatList from '@material-ui/icons/FormatListNumbered';
-
+import axios from 'axios'
 
 import  { getLibrosAction, deleteLibroAction, devolverLibroAction, prestarLibroAction } from '../../reducers/librosDuck';
 
-function LibrosList ({ getLibrosAction, deleteLibroAction, devolverLibroAction, prestarLibroAction }) {
+function LibrosList ({ getLibrosAction, deleteLibroAction, devolverLibroAction }) {
 
 	const alert = useAlert();
 	const state = useSelector(state => state.libros)
 	const persona = useSelector(state => state.persona)
+	const categoria = useSelector(state => state.categoria)
 	const [librosHtml, setLibrosHtml] = useState();
 	const [libros, setLibros] = useState();
 
 	const handleDelete = (e) =>{
 		const opcion = window.confirm('¿Seguro que quieres eliminar?');
 			if(opcion == true){
-					
 					deleteLibroAction(e)
 			}
 	}
 
 	useEffect(() => {
-		if(state.error && state.error != 0){
+		if(state.error[state.error.length -1 ] == null){
 			alert.error("No se puede eliminar un libro prestado");
 		}
 	}, [state.error]);
 
 	useEffect(() => {
+
 		if(persona.error && persona.error != 0){
 			alert.error("La persona no existe");
 		}
 	}, [persona.error]);
+
+
+	// const handlePrestar = (id) =>{
+	// 	const persona = prompt('INGRESA EL ID DE LA PERSONA:');
+	// 	console.log(persona)
+	// 	setPrestar(persona)
+	// 	setId(id)
+	// }
+	
+	// useEffect(() => {
+
+	// 	if(ID != undefined){
+	// 		prestarLibroAction(ID, prestar)
+	// 	}
+	// }, [ID]);
+
 	// const handleEditar = (e) => {
 	// 	e.preventDefault();
 		
@@ -59,11 +76,7 @@ function LibrosList ({ getLibrosAction, deleteLibroAction, devolverLibroAction, 
 	// 	modal.style = "opacity: 1;";
 	// }
 
-	const handlePrestar = (id) =>{
 
-		const persona = prompt('INGRESA EL ID DE LA PERSONA:');
-		prestarLibroAction(id, persona);
-	}
 
 	// 		await axios({
 	// 		    method: 'put',
@@ -120,15 +133,17 @@ function LibrosList ({ getLibrosAction, deleteLibroAction, devolverLibroAction, 
 	}, [state.loaded]);
 
 	useEffect(() => {
-		if(libros != undefined) {
+		if(libros != undefined && categoria != undefined) {
+			
 			const librosAux = libros.map((libro, index) => (
+				
 				<tr key={index}>
 					<td><p><strong>{index + 1}</strong></p></td>
 					<td><p>{libro.nombre}</p></td>
-					<td><p>{libro.categoria_id}</p></td>
 					<td><p>{libro.descripcion}</p></td>
-					<td><p>{libro.persona_id}</p></td>
-					<td>
+					{/* <td><p>{libro.categoria_id}</p></td>
+					<td><p>{libro.persona_id}</p></td> */}
+					{/* <td>
 						<IconButton color="primary">
 							<Tooltip title="Prestar">
 								<MenuBookIcon className="icon" onClick={() => {handlePrestar(libro.id)}} />
@@ -141,7 +156,7 @@ function LibrosList ({ getLibrosAction, deleteLibroAction, devolverLibroAction, 
 								<VerticalAlignBottomIcon className="icon" onClick={() => {handleDevolver(libro.id)}} />
 							</Tooltip>
 						</IconButton>
-					</td>
+					</td> */}
 					<td>
 						<IconButton color="primary">
 							<Tooltip title= "Borrar">
@@ -164,7 +179,8 @@ function LibrosList ({ getLibrosAction, deleteLibroAction, devolverLibroAction, 
 
 	return(
 		<div className='contentList'>
-			<h2>Tu Bibiblioteca</h2>
+			<h2>Tu Bibiblioteca</h2>			
+			<Filtro />
 			{
 				(state.loaded == false)
 				?
@@ -181,20 +197,19 @@ function LibrosList ({ getLibrosAction, deleteLibroAction, devolverLibroAction, 
 									<FormatList />
 								</Tooltip>
 							</th>
-							<th>Nombre</th>
-							<th>
-								<Tooltip title= "Categoria ID">
+							<th>Titulo</th>
+
+							<th id='descripcion_titulo'>Subtitulo</th>							
+							{/* <th>
+								<Tooltip title= "Categoria">
 									<ClassIcon />
 								</Tooltip>	                    	
 							</th>
-							<th id='descripcion_titulo'>Descripción</th>
 							<th>
 								<Tooltip title= "Persona ID">
 									<PersonIcon />
 								</Tooltip>
-							</th>
-							<th></th>
-							<th></th>
+							</th> */}
 							<th></th>
 							<th></th>
 						</tr>

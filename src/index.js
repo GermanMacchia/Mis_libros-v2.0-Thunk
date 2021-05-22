@@ -4,6 +4,9 @@ import App from './App';
 import { Provider } from 'react-redux';
 import generateStore from './reducers/rootReducer';
 import './index.css';
+import './media.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const store = generateStore(); 
 

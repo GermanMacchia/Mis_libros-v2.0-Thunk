@@ -1,0 +1,69 @@
+
+@media (max-width:1178px) {
+    .floatLeft {
+        float: none;
+        margin-left: 50px;
+    }
+    .homeform {
+        text-align: left;
+    }
+    .bigtext {
+        margin-left: 50px;
+    }
+    .homeform h2 {
+        text-align: center;
+    }
+    .contentForm {
+        height: 470px;
+    }
+    .contentList {
+        height: 470px;
+    }
+
+    #Lregistro, #Tregistro, #Cregistroi, #Pregistro {
+        text-align: center;
+    }
+}
+
+@media (max-width:812px) {
+    .contentList {
+        height: 470px;
+        width: auto;
+    }
+    .homeform {
+        text-align: left;
+    }
+    .display {
+        display: block;
+    }
+    .contentForm {
+        width: 97.5%;
+        text-align: center;
+        height: 560px;
+    }
+    nav ul a {
+        font-size: 13px;
+    }
+    #Lregistro, #Tregistro, #Cregistro, #Pregistro {
+        text-align: center;
+    }
+
+    #Lregistro, #Tregistro {
+        margin-right: 50px;
+
+    }
+}
+@media (max-width: 622px){
+    #nav{
+        display:contents;
+        border-top: solid #ffffff 5px;
+    }
+    #log{
+        flex-direction: column;
+        align-items: center;
+        
+    }
+    .Logform{
+        width: 97%;
+    }
+}

@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import Registro from '../Registro/Registro';
+
 import LoginForm from './LoginForm'
+
 
 export default function SignIn () {
 
@@ -9,7 +10,6 @@ export default function SignIn () {
 		<>
 			<div id="log">
 				<LoginForm />
-				<Registro />
 			</div>
 		</>
 	);
